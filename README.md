@@ -137,11 +137,14 @@ ischemic_stroke_prevention/
 │   ├── 06_feature_selection_lasso_pca.ipynb
 │   └── 07_deep_learning_hybrid_models.ipynb
 ├── reports/
-│   ├── figures/
+│   ├── figures/                   # EDA and model visualizations
 │   ├── dashboard.html
 │   └── model_card.md
 ├── docker/docker-compose.yml
 └── docs/
+    ├── data_dictionary.md
+    ├── eda_findings.md
+    ├── inferential_findings.md
     ├── radiomics_clinical_understanding.md
     └── decisions/                   # ADRs
 ```
@@ -173,16 +176,65 @@ ischemic_stroke_prevention/
 * Class imbalance: 29% over window at patient level
 * No demographic drift train->test (p=0.34 sex, p=0.10 age)
 
+**Clinical Research Insights (Phase 6.2):**
+
+Based on comprehensive literature review from npj Digital Medicine 2024 and related stroke imaging research:
+
+* CNN-Radiomics approaches outperform traditional radiomic methods by 2x (R2=0.58 vs 0.32 for stroke onset time prediction)
+* Key visual-radiomic mappings identified:
+  * ASPECTS score correlates with Shape2D and FirstOrder statistics
+  * Net Water Uptake (NWU) visible as hypodensity in FirstOrder_Mean
+  * Insular ribbon loss detectable via GLCM textural features
+  * Core vs penumbra differentiation through GLCM contrast and GLSZM zones
+* Contralateral features (difference between lesion and healthy hemisphere) provide superior predictive power
+* FirstOrder and Shape2D feature families most predictive for stroke timing
+
+**Feature Selection v2 Results (Phase 6.3):**
+
+* Implemented LASSO with bootstrap stability (>=80% selection frequency)
+* PCA with clinical interpretation of components
+* Mutual Information with minimum Redundancy Maximum Relevance (mRMR)
+* Contralateral feature engineering (lesion vs healthy hemisphere differences)
+* Reduced from 66 to approximately 20 core features while maintaining AUROC (~0.70)
+* Improved interpretability and reduced overfitting risk
+
+Key selected features align with clinical literature:
+* FirstOrder statistics (mean, median, entropy) capturing density changes
+* Shape2D descriptors (area, perimeter, sphericity) representing lesion morphology
+* GLCM contrast and correlation measuring tissue heterogeneity
+
 **Model v1 Limitations (Documented):**
 * Test AUROC = 0.41 (worse than chance) indicates underdetermination with N=55
 * Model works on severe lesions, fails on 4.7-9h "gray zone" with moderate NIHSS
 * No leakage detected; honest validation with GroupKFold
 * Recommendation: Expand cohort or migrate to CNN on DICOM for v2
 
-**Clinical Insights:**
-* CNN-Radiomics outperforms traditional methods 2x (R2=0.58 vs 0.32 per npj Digital Medicine 2024)
-* Contralateral features and FirstOrder/Shape2D families most predictive
+**Clinical Data Patterns:**
 * NIHSS/ASPECTS missing 10-20% (MAR clinical pattern: unconscious patients)
+* Missing data handled with median imputation + missing indicator features
+
+## Visualizations
+
+### Feature Selection Analysis
+
+![LASSO Stability Selection](reports/figures/lasso_stability_selection.png)
+*Features selected in >=80% of bootstrap iterations provide robust, reproducible predictors*
+
+![PCA Component Interpretation](reports/figures/pca_components_interpretation.png)
+*PCA reveals 3 main components: lesion density (FirstOrder), lesion morphology (Shape2D), and tissue heterogeneity (GLCM/GLSZM)*
+
+![Mutual Information Ranking](reports/figures/mutual_information_ranking.png)
+*Mutual Information with mRMR balances relevance against redundancy*
+
+### Model Comparison
+
+![Hybrid Models AUROC Comparison](reports/figures/hybrid_models_comparison.png)
+*Slice-level MIL with isotonic calibration shows improvement over patient-level aggregation*
+
+### Clinical Correlations
+
+![Radiomic Clinical Mapping](reports/figures/radiomic_clinical_correlation.png)
+*Correlation between radiomic features and clinical scores (NIHSS, ASPECTS)*
 
 ## Quickstart
 

@@ -1,0 +1,10 @@
+{
+  "name": "random_forest",
+  "aggregator": "noisy_or",
+  "threshold": 0.47368421052631576,
+  "k": 10,
+  "calibrate": true,
+  "oof_sensitivity": 0.5625,
+  "oof_specificity": 0.7435897435897436,
+  "oof_auroc": 0.7259615384615384
+}
