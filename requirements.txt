@@ -1,0 +1,60 @@
+# --- Core scientific stack ---
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.13.1
+# pyarrow pinned to 15.x because mlflow 2.13.2 requires pyarrow<16.
+pyarrow==15.0.2
+
+# --- Visualization ---
+# matplotlib pinned to 3.8.x because ydata-profiling 4.8.3 requires matplotlib<3.9.
+matplotlib==3.8.4
+seaborn==0.13.2
+plotly==5.22.0
+jinja2==3.1.4
+
+# --- EDA / profiling ---
+ydata-profiling==4.8.3
+statsmodels==0.14.2
+
+# --- Machine learning ---
+scikit-learn==1.5.0
+xgboost==2.0.3
+lightgbm==4.3.0
+imbalanced-learn==0.12.3
+shap==0.45.1
+
+# --- Experiment tracking ---
+mlflow==2.13.2
+
+# --- Data quality ---
+great-expectations==0.18.16
+
+# --- Data access ---
+sqlalchemy==2.0.30
+psycopg2-binary==2.9.9
+pydantic==2.7.4
+pydantic-settings==2.3.3
+python-dotenv==1.0.1
+
+# --- Streaming ---
+confluent-kafka==2.4.0
+fastavro==1.9.4
+
+# --- CLI / monitoring ---
+rich==13.7.1
+typer==0.12.3
+
+# --- Notebooks ---
+jupyterlab==4.2.2
+papermill==2.6.0
+ipykernel==6.29.4
+
+# --- Dev tooling ---
+ruff==0.4.9
+black==24.4.2
+pytest==8.2.2
+pytest-cov==5.0.0
+
+# --- Airflow (constraint-friendly minimal install for local DAG dev) ---
+# Airflow se instala dentro del contenedor docker; acá solo dejamos el SDK para tests locales.
+apache-airflow-client==2.9.0

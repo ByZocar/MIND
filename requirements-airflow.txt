@@ -1,0 +1,37 @@
+# =====================================================================
+# requirements-airflow.txt
+#
+# Minimal runtime dependencies needed INSIDE the Airflow container to
+# execute the DAGs (ETL + GE quality gate).
+#
+# Heavy ML / EDA / visualization libs are intentionally NOT here.
+# They live in:
+#   - the local venv (training, EDA, dashboards)
+#   - the mlflow service (experiment tracking)
+#   - the kafka producer/consumer services (streaming)
+#
+# Versions are not pinned: Airflow's official constraints file decides,
+# avoiding the dependency-conflict whack-a-mole.
+# =====================================================================
+
+# core data
+pandas
+numpy
+pyarrow
+sqlalchemy
+
+# settings / dotenv
+pydantic
+pydantic-settings
+python-dotenv
+
+# DB driver
+psycopg2-binary
+
+# CLI / logging used by acv.quality.gate
+rich
+typer
+
+# Note: great-expectations is intentionally NOT required at runtime.
+# Our quality gate (acv.quality) uses GE-shaped dataclasses but evaluates
+# them with a tiny in-house runner. See ADR-012 in agent.md.

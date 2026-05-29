@@ -1,0 +1,70 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+*.egg-info/
+build/
+dist/
+
+# --- Env / secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Data (privado / clínico) ---
+# Cualquier CSV con datos clínicos crudos en la raíz del repo (no commitear nunca).
+/acv_clasif_*.csv
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+
+# --- Modelos y artefactos ---
+models/
+mlruns/
+mlflow_artifacts/
+
+# --- Reportes generados ---
+reports/figures/*
+!reports/figures/.gitkeep
+reports/dashboard.html
+
+# --- Airflow runtime ---
+airflow/logs/
+airflow/airflow.db
+airflow/airflow-webserver.pid
+airflow/standalone_admin_password.txt
+
+# --- Great Expectations local ---
+great_expectations/uncommitted/
+
+# --- Docker volumes locales ---
+docker/volumes/
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# --- ephemeral helpers ---
+.commit_msg.tmp
+*.tmp.log
+pip_resolve.log
