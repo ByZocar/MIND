@@ -41,9 +41,16 @@ mlruns/
 mlflow_artifacts/
 
 # --- Reportes generados ---
+# Ignorar todo en figures excepto imagenes de analisis y .gitkeep
 reports/figures/*
 !reports/figures/.gitkeep
-reports/dashboard.html
+!reports/figures/*.png
+!reports/figures/*.jpg
+!reports/figures/*.jpeg
+!reports/figures/*.svg
+!reports/figures/*.gif
+# Dashboard HTML - comentar para versionar si no contiene PII
+# reports/dashboard.html
 
 # --- Airflow runtime ---
 airflow/logs/
