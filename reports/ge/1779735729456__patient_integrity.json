@@ -1,0 +1,41 @@
+{
+  "suite_name": "patient_integrity",
+  "success": true,
+  "n_rows": 2820,
+  "n_expectations": 3,
+  "n_failed": 0,
+  "results": [
+    {
+      "expectation_type": "expect_column_pair_values_A_to_be_greater_than_B",
+      "column": "evolution_minutes",
+      "success": true,
+      "details": {
+        "rule": "evolution_minutes > 270 == is_over_window",
+        "agreement": 1.0
+      }
+    },
+    {
+      "expectation_type": "expect_table_row_count_to_be_between",
+      "column": null,
+      "success": true,
+      "details": {
+        "min_value": 2820,
+        "max_value": 2820,
+        "actual": 2820
+      }
+    },
+    {
+      "expectation_type": "expect_compound_columns_to_be_unique",
+      "column": null,
+      "success": true,
+      "details": {
+        "columns": [
+          "dataset_origin",
+          "patient_id",
+          "slice_order"
+        ],
+        "n_duplicates": 0
+      }
+    }
+  ]
+}

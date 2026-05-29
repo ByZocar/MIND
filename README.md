@@ -176,6 +176,12 @@ ischemic_stroke_prevention/
 * Class imbalance: 29% over window at patient level
 * No demographic drift train->test (p=0.34 sex, p=0.10 age)
 
+**EDA Findings:**
+* One feature survived Benjamini-Hochberg FDR correction: `glszm_smallarealowgraylevelemphasis_std` (Cohen's d = -0.866)
+* Zero features with statistical drift between train and test sets
+* Sex not associated with target (p=0.187)
+* PCA reveals 3 main components: lesion density (FirstOrder), lesion morphology (Shape2D), tissue heterogeneity (GLCM/GLSZM)
+
 **Clinical Research Insights (Phase 6.2):**
 
 Based on comprehensive literature review from npj Digital Medicine 2024 and related stroke imaging research:
@@ -209,32 +215,65 @@ Key selected features align with clinical literature:
 * No leakage detected; honest validation with GroupKFold
 * Recommendation: Expand cohort or migrate to CNN on DICOM for v2
 
+**Slice-Level MIL v1.1 Improvements:**
+* Treating each slice as instance with inherited target
+* Aggregation via noisy-or probabilistic method
+* Isotonic calibration with k=10 bins
+* OOF AUROC improved from 0.63 to 0.715 (+15% relative)
+* Test AUROC: 0.506 [0.27, 0.73] with wide confidence intervals
+* Model performs well on severe lesions, fails in 4.7-9h temporal gray zone with moderate NIHSS/ASPECTS
+
 **Clinical Data Patterns:**
 * NIHSS/ASPECTS missing 10-20% (MAR clinical pattern: unconscious patients)
 * Missing data handled with median imputation + missing indicator features
 
-## Visualizations
+## Results and Visualizations
 
-### Feature Selection Analysis
+### Data Structure and Quality
 
-![LASSO Stability Selection](reports/figures/lasso_stability_selection.png)
-*Features selected in >=80% of bootstrap iterations provide robust, reproducible predictors*
+![Slices per Patient Distribution](reports/figures/01_slices_per_patient.png)
+*Figure 1: Distribution of CT slices per patient. The dataset contains 2,820 slices from 74 unique patients, with significant variation (median ~29 slices per patient). This multi-instance structure requires careful handling to prevent data leakage.*
 
-![PCA Component Interpretation](reports/figures/pca_components_interpretation.png)
-*PCA reveals 3 main components: lesion density (FirstOrder), lesion morphology (Shape2D), and tissue heterogeneity (GLCM/GLSZM)*
+![Leakage Check Evolution Time](reports/figures/02_leakage_evolution_time.png)
+*Figure 2: Verification that Evolution Time (in minutes) is correctly separated between train and test sets at patient level. No information leakage detected.*
 
-![Mutual Information Ranking](reports/figures/mutual_information_ranking.png)
-*Mutual Information with mRMR balances relevance against redundancy*
+![Demographic Drift Analysis](reports/figures/03_demographic_drift.png)
+*Figure 3: Statistical tests for demographic drift between train and test sets. No significant drift detected (sex p=0.34, age p=0.10), validating the split integrity.*
 
-### Model Comparison
+![Probe Features by Class](reports/figures/04_probe_features_by_class.png)
+*Figure 4: Initial exploration of top radiomic features stratified by therapeutic window class. Visual inspection reveals potential discriminative patterns.*
 
-![Hybrid Models AUROC Comparison](reports/figures/hybrid_models_comparison.png)
-*Slice-level MIL with isotonic calibration shows improvement over patient-level aggregation*
+### Exploratory Data Analysis
 
-### Clinical Correlations
+![Box Plots by Class](reports/figures/eda_descriptive_01_box_by_class.png)
+*Figure 5: Distribution of key radiomic features by therapeutic window class (<=4.5h vs >4.5h). FirstOrder and Shape2D families show the most pronounced differences.*
 
-![Radiomic Clinical Mapping](reports/figures/radiomic_clinical_correlation.png)
-*Correlation between radiomic features and clinical scores (NIHSS, ASPECTS)*
+![Feature Correlation Matrix](reports/figures/eda_descriptive_02_corr.png)
+*Figure 6: Correlation matrix of radiomic features. High correlation clusters within feature families (GLCM, GLSZM, Shape2D) guide dimensionality reduction strategy.*
+
+![PCA Analysis](reports/figures/eda_descriptive_03_pca.png)
+*Figure 7: Principal Component Analysis reveals 3 main components: (1) lesion density (FirstOrder), (2) lesion morphology (Shape2D), and (3) tissue heterogeneity (GLCM/GLSZM). This aligns with clinical understanding of stroke evolution patterns.*
+
+### Inferential Analysis
+
+![Top N Features by Statistical Test](reports/figures/eda_inferential_01_topN.png)
+*Figure 8: Top features ranked by statistical significance (Mann-Whitney U and Welch t-test). Only `glszm_smallarealowgraylevelemphasis_std` survives Benjamini-Hochberg FDR correction at alpha=0.05.*
+
+### Model Diagnostics and Performance
+
+![Model Diagnostics Overview](reports/figures/model_diagnostics_01.png)
+*Figure 9: Model performance comparison across different approaches. Slice-level MIL with isotonic calibration shows improvement over patient-level aggregation (OOF AUROC 0.715 vs 0.63).*
+
+![Errors by Clinical Variables](reports/figures/model_diagnostics_02_errors_by_clinical.png)
+*Figure 10: Analysis of model errors stratified by clinical variables (NIHSS, ASPECTS). The model struggles most in the 4.7-9h temporal gray zone with moderate clinical scores.*
+
+### Feature Family Analysis
+
+![Feature Family Analysis](reports/figures/real_data_family_analysis.png)
+*Figure 11: Predictive power analysis by radiomic feature family. FirstOrder (intensity) and Shape2D (morphology) families demonstrate highest discriminative capacity, consistent with clinical radiomics literature.*
+
+![Model Comparison by Feature Family](reports/figures/real_data_model_comparison.png)
+*Figure 12: Model performance comparison when trained on different feature families. Models using FirstOrder + Shape2D features approach full feature set performance with significantly lower complexity.*
 
 ## Quickstart
 

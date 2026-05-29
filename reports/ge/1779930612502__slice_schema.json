@@ -1,0 +1,221 @@
+{
+  "suite_name": "slice_schema",
+  "success": true,
+  "n_rows": 2820,
+  "n_expectations": 19,
+  "n_failed": 0,
+  "results": [
+    {
+      "expectation_type": "expect_table_columns_to_match_set",
+      "column": null,
+      "success": true,
+      "details": {
+        "missing_columns": []
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "patient_id",
+      "success": true,
+      "details": {
+        "n_null": 0,
+        "n_total": 2820
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "slice_order",
+      "success": true,
+      "details": {
+        "n_null": 0,
+        "n_total": 2820
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "dataset_origin",
+      "success": true,
+      "details": {
+        "n_null": 0,
+        "n_total": 2820
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_not_be_null",
+      "column": "is_over_window",
+      "success": true,
+      "details": {
+        "n_null": 0,
+        "n_total": 2820
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_meshsurface",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_perimeter",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_maximumdiameter",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_majoraxislength",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_minoraxislength",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "firstorder_range",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "firstorder_variance",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "firstorder_uniformity",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "glcm_jointenergy",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "glcm_maximumprobability",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "glszm_zonepercentage",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_sphericity",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": 1.0001,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "shape2d_elongation",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": 1.0001,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "column": "dataset_origin",
+      "success": true,
+      "details": {
+        "value_set": [
+          "train",
+          "test"
+        ],
+        "n_violations": 0
+      }
+    }
+  ]
+}

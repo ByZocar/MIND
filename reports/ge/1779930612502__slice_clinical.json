@@ -1,0 +1,81 @@
+{
+  "suite_name": "slice_clinical",
+  "success": true,
+  "n_rows": 2820,
+  "n_expectations": 6,
+  "n_failed": 0,
+  "results": [
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "nihss",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": 42,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "aspects",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": 10,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "age_years",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": 120,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "column": "sex",
+      "success": true,
+      "details": {
+        "value_set": [
+          "M",
+          "F"
+        ],
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_in_set",
+      "column": "is_over_window",
+      "success": true,
+      "details": {
+        "value_set": [
+          0,
+          1
+        ],
+        "n_violations": 0
+      }
+    },
+    {
+      "expectation_type": "expect_column_values_to_be_between",
+      "column": "evolution_minutes",
+      "success": true,
+      "details": {
+        "min_value": 0,
+        "max_value": null,
+        "mostly": 1.0,
+        "pass_rate": 1.0,
+        "n_violations": 0
+      }
+    }
+  ]
+}
